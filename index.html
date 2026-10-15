@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="My Library — A beautiful, minimal book tracker to manage your reading list." />
+  <title>My Library · Book Tracker</title>
+
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ╔══════════════════════════════════════════╗
+       ║              HEADER                      ║
+       ╚══════════════════════════════════════════╝ -->
+  <header class="site-header">
+    <div class="header-bg-blobs" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+    </div>
+    <div class="header-inner">
+      <div class="brand-lockup">
+        <div class="brand-emblem" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" rx="10" fill="#C9714A" fill-opacity=".15"/>
+            <path d="M9 10h8a6 6 0 0 1 6 6v11a3 3 0 0 0-3-3H9V10Z" fill="#C9714A" fill-opacity=".6"/>
+            <path d="M27 10h-8a6 6 0 0 0-6 6v11a3 3 0 0 1 3-3h11V10Z" fill="#C9714A"/>
+            <path d="M13 15h4M13 18.5h4M13 22h2" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">My Library</h1>
+          <p class="brand-subtitle">Track every page of your journey</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ╔══════════════════════════════════════════╗
+       ║               MAIN                       ║
+       ╚══════════════════════════════════════════╝ -->
+  <main class="site-main">
+    <div class="content-wrap">
+
+      <!-- ── 1. STATUS SUMMARY BAR ── -->
+      <section class="summary-bar" aria-label="Reading statistics">
+        <div class="summary-card summary-total">
+          <span class="summary-icon" aria-hidden="true">📚</span>
+          <div class="summary-info">
+            <span class="summary-count" id="stat-total">5</span>
+            <span class="summary-label">Total</span>
+          </div>
+        </div>
+
+        <div class="summary-divider" aria-hidden="true"></div>
+
+        <div class="summary-card summary-toread">
+          <span class="summary-icon" aria-hidden="true">🔖</span>
+          <div class="summary-info">
+            <span class="summary-count" id="stat-toread">2</span>
+            <span class="summary-label">To Read</span>
+          </div>
+        </div>
+
+        <div class="summary-divider" aria-hidden="true"></div>
+
+        <div class="summary-card summary-reading">
+          <span class="summary-icon" aria-hidden="true">📖</span>
+          <div class="summary-info">
+            <span class="summary-count" id="stat-reading">2</span>
+            <span class="summary-label">Reading</span>
+          </div>
+        </div>
+
+        <div class="summary-divider" aria-hidden="true"></div>
+
+        <div class="summary-card summary-finished">
+          <span class="summary-icon" aria-hidden="true">✅</span>
+          <div class="summary-info">
+            <span class="summary-count" id="stat-finished">1</span>
+            <span class="summary-label">Finished</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ── 2. ADD BOOK FORM SECTION ── -->
+      <section class="form-section" aria-labelledby="form-heading">
+        <div class="section-header">
+          <h2 class="section-title" id="form-heading">
+            <span class="section-title-icon" aria-hidden="true">＋</span>
+            Add a New Book
+          </h2>
+          <button
+            class="form-toggle-btn"
+            id="toggle-form-btn"
+            aria-expanded="false"
+            aria-controls="book-form-panel"
+            title="Toggle form"
+          >
+            <span class="toggle-icon" aria-hidden="true">▾</span>
+          </button>
+        </div>
+
+        <div class="form-panel" id="book-form-panel" aria-hidden="false">
+          <form id="book-form" novalidate autocomplete="off">
+
+            <!-- Row: Title + Author -->
+            <div class="form-row">
+
+              <!-- Title Field -->
+              <div class="field-group" id="field-title">
+                <label class="field-label" for="input-title">
+                  Book Title <span class="field-required" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h10M2 5h7M2 8h9M2 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  </span>
+                  <input
+                    type="text"
+                    id="input-title"
+                    class="form-input"
+                    placeholder="e.g. The Alchemist"
+                    aria-describedby="error-title"
+                    aria-required="true"
+                  />
+                </div>
+                <!-- Validation message container -->
+                <p class="field-error" id="error-title" role="alert" aria-live="polite"></p>
+              </div>
+
+              <!-- Author Field -->
+              <div class="field-group" id="field-author">
+                <label class="field-label" for="input-author">
+                  Author <span class="field-required" aria-hidden="true">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="4.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 12.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  </span>
+                  <input
+                    type="text"
+                    id="input-author"
+                    class="form-input"
+                    placeholder="e.g. Paulo Coelho"
+                    aria-describedby="error-author"
+                    aria-required="true"
+                  />
+                </div>
+                <!-- Validation message container -->
+                <p class="field-error" id="error-author" role="alert" aria-live="polite"></p>
+              </div>
+
+            </div><!-- /form-row -->
+
+            <!-- Row: Status + Submit -->
+            <div class="form-row form-row-bottom">
+
+              <!-- Status Field -->
+              <div class="field-group field-group-status">
+                <label class="field-label" for="input-status">Reading Status</label>
+                <div class="input-wrapper select-wrapper">
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <select id="input-status" class="form-input form-select" aria-label="Reading status">
+                    <option value="to-read">📚 To Read</option>
+                    <option value="reading">📖 Reading</option>
+                    <option value="finished">✅ Finished</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="add-btn" id="submit-btn">
+                <span class="add-btn-icon" aria-hidden="true">＋</span>
+                <span class="add-btn-text">Add Book</span>
+              </button>
+
+            </div><!-- /form-row-bottom -->
+
+          </form>
+        </div><!-- /form-panel -->
+      </section>
+
+
+      <!-- ── 3. CONTROLS: SEARCH BAR ── -->
+      <section class="controls-section" aria-label="Search and filter">
+        <div class="search-box">
+          <span class="search-box-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search by title or author…"
+            aria-label="Search your library"
+            autocomplete="off"
+          />
+          <button class="search-clear-btn" id="search-clear" aria-label="Clear search" hidden>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <!-- Active filter indicator -->
+        <div class="search-results-count" id="search-results-count" aria-live="polite" hidden></div>
+      </section>
+
+
+      <!-- ── 4. LIBRARY GRID ── -->
+      <section class="library-section" aria-label="Your book collection">
+
+        <!-- Section meta row -->
+        <div class="library-meta">
+          <h2 class="library-heading" id="library-heading">Your Collection</h2>
+          <span class="library-count" id="library-count" aria-live="polite">5 books</span>
+        </div>
+
+        <!-- ════ BOOK CARDS GRID ════ -->
+        <div class="books-grid" id="books-grid" role="list" aria-labelledby="library-heading">
+
+          <!-- ── MOCK CARD 1: Reading ── -->
+          <article class="book-card" data-status="reading" role="listitem" aria-label="Atomic Habits by James Clear — Reading">
+            <div class="card-header">
+              <div class="card-cover card-cover-reading" aria-hidden="true">
+                <span class="card-cover-letter">A</span>
+              </div>
+              <button class="card-delete-btn" aria-label="Delete Atomic Habits" title="Remove book">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Atomic Habits</h3>
+              <p class="card-author">James Clear</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="status-pill pill-reading">📖 Reading</span>
+              <select class="card-status-select" data-status="reading" aria-label="Change status for Atomic Habits">
+                <option value="to-read">To Read</option>
+                <option value="reading" selected>Reading</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
+
+            <div class="card-date">Added Oct 12, 2026</div>
+          </article>
+
+          <!-- ── MOCK CARD 2: Finished ── -->
+          <article class="book-card" data-status="finished" role="listitem" aria-label="The Midnight Library by Matt Haig — Finished">
+            <div class="card-header">
+              <div class="card-cover card-cover-finished" aria-hidden="true">
+                <span class="card-cover-letter">M</span>
+              </div>
+              <button class="card-delete-btn" aria-label="Delete The Midnight Library" title="Remove book">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">The Midnight Library</h3>
+              <p class="card-author">Matt Haig</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="status-pill pill-finished">✅ Finished</span>
+              <select class="card-status-select" data-status="finished" aria-label="Change status for The Midnight Library">
+                <option value="to-read">To Read</option>
+                <option value="reading">Reading</option>
+                <option value="finished" selected>Finished</option>
+              </select>
+            </div>
+
+            <div class="card-date">Added Oct 5, 2026</div>
+          </article>
+
+          <!-- ── MOCK CARD 3: To Read ── -->
+          <article class="book-card" data-status="to-read" role="listitem" aria-label="Dune by Frank Herbert — To Read">
+            <div class="card-header">
+              <div class="card-cover card-cover-toread" aria-hidden="true">
+                <span class="card-cover-letter">D</span>
+              </div>
+              <button class="card-delete-btn" aria-label="Delete Dune" title="Remove book">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Dune</h3>
+              <p class="card-author">Frank Herbert</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="status-pill pill-toread">🔖 To Read</span>
+              <select class="card-status-select" data-status="to-read" aria-label="Change status for Dune">
+                <option value="to-read" selected>To Read</option>
+                <option value="reading">Reading</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
+
+            <div class="card-date">Added Sep 28, 2026</div>
+          </article>
+
+          <!-- ── MOCK CARD 4: Reading ── -->
+          <article class="book-card" data-status="reading" role="listitem" aria-label="Sapiens by Yuval Noah Harari — Reading">
+            <div class="card-header">
+              <div class="card-cover card-cover-reading" aria-hidden="true">
+                <span class="card-cover-letter">S</span>
+              </div>
+              <button class="card-delete-btn" aria-label="Delete Sapiens" title="Remove book">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">Sapiens</h3>
+              <p class="card-author">Yuval Noah Harari</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="status-pill pill-reading">📖 Reading</span>
+              <select class="card-status-select" data-status="reading" aria-label="Change status for Sapiens">
+                <option value="to-read">To Read</option>
+                <option value="reading" selected>Reading</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
+
+            <div class="card-date">Added Sep 20, 2026</div>
+          </article>
+
+          <!-- ── MOCK CARD 5: To Read ── -->
+          <article class="book-card" data-status="to-read" role="listitem" aria-label="1984 by George Orwell — To Read">
+            <div class="card-header">
+              <div class="card-cover card-cover-toread" aria-hidden="true">
+                <span class="card-cover-letter">1</span>
+              </div>
+              <button class="card-delete-btn" aria-label="Delete 1984" title="Remove book">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <h3 class="card-title">1984</h3>
+              <p class="card-author">George Orwell</p>
+            </div>
+
+            <div class="card-footer">
+              <span class="status-pill pill-toread">🔖 To Read</span>
+              <select class="card-status-select" data-status="to-read" aria-label="Change status for 1984">
+                <option value="to-read" selected>To Read</option>
+                <option value="reading">Reading</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
+
+            <div class="card-date">Added Sep 15, 2026</div>
+          </article>
+
+        </div><!-- /books-grid -->
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-illustration" aria-hidden="true">🌿</div>
+          <p class="empty-title">Your shelf is empty</p>
+          <p class="empty-body">Add your first book above to get started.</p>
+        </div>
+
+        <!-- No Results (hidden by default) -->
+        <div class="no-results-state" id="no-results" hidden>
+          <div class="empty-illustration" aria-hidden="true">🔍</div>
+          <p class="empty-title">No matches found</p>
+          <p class="empty-body">Try a different title or author name.</p>
+        </div>
+
+      </section><!-- /library-section -->
+
+    </div><!-- /content-wrap -->
+  </main>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <p>Made with <span aria-label="love">♥</span> for readers &nbsp;·&nbsp; <span id="footer-year"></span></p>
+  </footer>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
